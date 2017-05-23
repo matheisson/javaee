@@ -1,6 +1,7 @@
 package model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by levente on 2017.05.23..
@@ -8,16 +9,17 @@ import javax.persistence.*;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "findByTown", query = "select a from Address a where a.city ='Budapest'"),
-        @NamedQuery(name = "selectNum", query = "select a from Address a where a.no >24")
+        @NamedQuery(name = "selectNum", query = "select a from Address a where a.nom >24")
 })
 public class Address {
 
     @Id
     @GeneratedValue
     private Long id;
+    @NotNull
     private String city;
     private String street;
-    private Integer no;
+    private Integer nom;
     private String county;
 
     public Address() {
@@ -26,7 +28,7 @@ public class Address {
     public Address(String city, String street, Integer no, String county) {
         this.city = city;
         this.street = street;
-        this.no = no;
+        this.nom = no;
         this.county = county;
     }
 
@@ -55,11 +57,11 @@ public class Address {
     }
 
     public Integer getNo() {
-        return no;
+        return nom;
     }
 
     public void setNo(Integer no) {
-        this.no = no;
+        this.nom = no;
     }
 
     public String getCounty() {
