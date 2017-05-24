@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/javaee.iml" filepath="$PROJECT_DIR$/javaee.iml" />
+      <module fileurl="file://$PROJECT_DIR$/relDb/relDb.iml" filepath="$PROJECT_DIR$/relDb/relDb.iml" />
     </modules>
   </component>
 </project>

@@ -20,6 +20,7 @@ public class Address {
     private String city;
     private String street;
     private Integer nom;
+    @Column(name = "county_name")
     private String county;
 
     public Address() {

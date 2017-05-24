@@ -23,10 +23,12 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="javaee" />
+        <module name="relDb" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="javaee" target="1.5" />
+      <module name="relDb" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
