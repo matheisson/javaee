@@ -19,6 +19,9 @@ public class Order {
     @OneToMany(fetch = FetchType.EAGER)
     // without jColumn join table gets created
 //    @JoinColumn(name = "order_fk")
+    @JoinTable(name = "custom_join_table_name",
+                joinColumns = @JoinColumn(name = "order_fk"),
+                inverseJoinColumns = @JoinColumn(name = "orderline_fk"))
     private List<OrderLine> orderLines;
 
     public Order() {
