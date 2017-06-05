@@ -7,9 +7,13 @@ import java.util.List;
  * Created by levente on 2017.05.25..
  */
 @Entity
-@NamedQuery(name = "all_cds", query = "SELECT a FROM Artist a")
+@NamedQueries({
+@NamedQuery(name = "all_cds", query = "SELECT a FROM Artist a"),
+@NamedQuery(name = Artist.FIND_ONE, query = "SELECT a FROM Artist a WHERE a.firstName = :name")
+})
 public class Artist {
 
+    public static final String FIND_ONE = "Artist.findOne";
     @Id @GeneratedValue
     private Long id;
     private String firstName;

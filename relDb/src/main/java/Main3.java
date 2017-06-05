@@ -1,9 +1,7 @@
 import model3.Artist;
 import model3.CD;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.util.Arrays;
 import java.util.List;
 
@@ -56,7 +54,25 @@ public class Main3 {
             System.out.println(cd.getTitle());
         }
 
-        System.out.println("done");
+        System.out.println('\n');
+
+        Artist miles = new Artist("Miles", "Davis");
+
+        tx.begin();
+        emf.persist(miles);
+        miles.setFirstName("Miles III");
+        tx.commit();
+
+        TypedQuery<Artist> queryWithParameter = emf.createQuery("SELECT a from Artist a where a.firstName = ?1", Artist.class);
+        queryWithParameter.setParameter(1,"Jimi");
+        Artist j = queryWithParameter.getSingleResult();
+
+        TypedQuery<Artist> noelR = emf.createNamedQuery(Artist.FIND_ONE, Artist.class).setParameter("name","Noel");
+        Artist n = noelR.getSingleResult();
+
+        System.out.println(n.getLastName());
+
+        System.out.println(j.toString());
     }
 
 }
