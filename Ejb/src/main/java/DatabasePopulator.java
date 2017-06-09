@@ -1,5 +1,9 @@
+import ejb.Book;
+import ejb.BookEJB;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.annotation.sql.DataSourceDefinition;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
@@ -9,15 +13,15 @@ import javax.inject.Inject;
  */
 @Singleton
 @Startup
-//@DataSourceDefinition(
-//        className = "org.postgresql.ds.PGConnectionPoolDataSource",
-//        name = "java:global/jdbc/jee",
-//        databaseName = "jee",
-//        portNumber = 5432,
-//        user = "postgres",
-//        password = "postgres",
-//        properties = {"connectionAttributes=;create=true"}
-//)
+@DataSourceDefinition(
+        className = "org.postgresql.ds.PGConnectionPoolDataSource",
+        name = "java:global/jdbc/jee",
+        databaseName = "jee",
+        portNumber = 5432,
+        user = "postgres",
+        password = "postgres",
+        properties = {"connectionAttributes=;create=true"}
+)
 public class DatabasePopulator {
 
     @Inject

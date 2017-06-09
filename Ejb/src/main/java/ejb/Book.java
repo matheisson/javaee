@@ -1,3 +1,5 @@
+package ejb;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -94,7 +96,7 @@ public class Book implements Serializable{
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("Book");
+        sb.append("ejb.Book");
         sb.append("{id=").append(id);
         sb.append(", title='").append(title).append('\'');
         sb.append(", price=").append(price);

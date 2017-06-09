@@ -1,3 +1,5 @@
+package ejb;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;

@@ -1,9 +1,10 @@
-import javax.ejb.embeddable.EJBContainer;
+import ejb.Book;
+import ejb.BookEJBRemote;
+
 import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 /**
  * Created by levente on 2017.06.05..
@@ -12,22 +13,25 @@ public class Main {
 
     public static void main(String[] args) throws NamingException {
 
-        Map<String, Object> properties = new HashMap<>();
-        properties.put(EJBContainer.MODULES, new File("target/classes"));
-        try (EJBContainer ec = EJBContainer.createEJBContainer(properties)) {
-            Context ctx = ec.getContext();
-            Book book = new Book();
-            book.setTitle("The Hitchhiker's Guide to the Galaxy");
-            book.setPrice(12.5F);
-            book.setDescription("Science fiction comedy book");
-            book.setIsbn("1-84173-742-2");
-            book.setNbOfPage(354);
-            book.setIllustrations(false);
-            BookEJB itemEJB = (BookEJB) ctx.lookup("java:global/classes/BookEJB ");
-            itemEJB.createBook(book);
-            for (Book aBook : itemEJB.findBooks()) {
-                System.out.println(aBook);
-            }
+        Context ctx = new InitialContext();
+        BookEJBRemote bookEJB = (BookEJBRemote) ctx.lookup("java:module/ejb.BookEJB!src.main.java.ejb.BookEJBRemote");
+
+        // Gets and displays all the books from the database
+        List<Book> books = bookEJB.findBooks();
+        for (Book aBook : books) {
+            System.out.println("--- " + aBook);
         }
+
+        Book book = new Book("The Hitchhiker's Guide to the Galaxy", 12.5F, "Science fiction by Douglas Adams.", "1-24561-799-0", 354, false);
+
+        book = bookEJB.createBook(book);
+        System.out.println("### ejb.Book created : " + book);
+
+        book.setTitle("H2G2");
+        book = bookEJB.updateBook(book);
+        System.out.println("### ejb.Book updated : " + book);
+
+        bookEJB.deleteBook(book);
+        System.out.println("### ejb.Book deleted");
     }
 }
